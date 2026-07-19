@@ -1,0 +1,472 @@
+<style>
+    :root {
+        --footer-indigo: #0f172a;
+        --footer-indigo-light: #172554;
+        --footer-orange: #f97316;
+        --footer-white: #ffffff;
+        --footer-text: #cbd5e1;
+        --footer-border: rgba(255, 255, 255, 0.1);
+    }
+
+    .site-footer {
+        position: relative;
+        overflow: hidden;
+        color: var(--footer-white);
+        background:
+            radial-gradient(
+                circle at 10% 20%,
+                rgba(249, 115, 22, 0.12),
+                transparent 30%
+            ),
+            linear-gradient(
+                135deg,
+                var(--footer-indigo-light),
+                var(--footer-indigo)
+            );
+    }
+
+    .site-footer::before {
+        content: "⚖";
+        position: absolute;
+        left: 5%;
+        bottom: -65px;
+        color: rgba(255, 255, 255, 0.025);
+        font-size: 240px;
+        pointer-events: none;
+    }
+
+    .footer-container {
+        position: relative;
+        z-index: 1;
+        width: min(1180px, calc(100% - 40px));
+        margin: 0 auto;
+        padding: 70px 0 35px;
+    }
+
+    .footer-grid {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+        gap: 45px;
+    }
+
+    .footer-brand {
+        max-width: 360px;
+    }
+
+    .footer-logo {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 210px;
+        min-height: 112px;
+        padding: 8px 12px;
+        overflow: hidden;
+        margin-bottom: 20px;
+        color: var(--footer-white);
+        background: #fff;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 18px;
+        box-shadow: 0 14px 35px rgba(0, 0, 0, 0.18);
+        text-decoration: none;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .footer-logo:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.24);
+    }
+
+    .footer-logo-image {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: contain;
+    }
+
+    .footer-description {
+        margin: 0 0 22px;
+        color: var(--footer-text);
+        font-size: 14px;
+        line-height: 2;
+    }
+
+    .social-links {
+        display: flex;
+        gap: 9px;
+    }
+
+    .social-link {
+        width: 40px;
+        height: 40px;
+        display: grid;
+        place-items: center;
+        color: var(--footer-white);
+        background-color: rgba(255, 255, 255, 0.07);
+        border: 1px solid var(--footer-border);
+        border-radius: 10px;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 700;
+        transition:
+            transform 0.25s ease,
+            background-color 0.25s ease;
+    }
+
+    .social-link:hover {
+        background-color: var(--footer-orange);
+        transform: translateY(-3px);
+    }
+
+    .footer-heading {
+        position: relative;
+        margin: 0 0 25px;
+        padding-bottom: 12px;
+        font-size: 17px;
+        font-weight: 800;
+    }
+
+    .footer-heading::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 34px;
+        height: 3px;
+        border-radius: 5px;
+        background-color: var(--footer-orange);
+    }
+
+    .footer-links,
+    .contact-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .footer-links li {
+        margin-bottom: 12px;
+    }
+
+    .footer-links a {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--footer-text);
+        text-decoration: none;
+        font-size: 14px;
+        transition:
+            color 0.25s ease,
+            transform 0.25s ease;
+    }
+
+    .footer-links a::before {
+        content: "‹";
+        color: var(--footer-orange);
+        font-size: 20px;
+    }
+
+    .footer-links a:hover {
+        color: var(--footer-white);
+        transform: translateX(-4px);
+    }
+
+    .contact-list {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .contact-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 11px;
+        color: var(--footer-text);
+        font-size: 14px;
+        line-height: 1.8;
+    }
+
+    .contact-icon {
+        width: 34px;
+        height: 34px;
+        display: grid;
+        place-items: center;
+        flex-shrink: 0;
+        color: var(--footer-orange);
+        background-color: rgba(249, 115, 22, 0.1);
+        border-radius: 9px;
+    }
+
+    .contact-item a {
+        color: var(--footer-text);
+        text-decoration: none;
+    }
+
+    .contact-item a:hover {
+        color: var(--footer-white);
+    }
+
+    .footer-newsletter {
+        margin-top: 28px;
+    }
+
+    .newsletter-label {
+        display: block;
+        margin-bottom: 9px;
+        color: var(--footer-text);
+        font-size: 13px;
+    }
+
+    .newsletter-form {
+        display: flex;
+        overflow: hidden;
+        border: 1px solid var(--footer-border);
+        border-radius: 10px;
+        background-color: rgba(255, 255, 255, 0.06);
+    }
+
+    .newsletter-input {
+        width: 100%;
+        min-width: 0;
+        padding: 12px 13px;
+        color: var(--footer-white);
+        background: transparent;
+        border: 0;
+        outline: 0;
+        font-family: inherit;
+    }
+
+    .newsletter-input::placeholder {
+        color: #94a3b8;
+    }
+
+    .newsletter-button {
+        padding: 0 15px;
+        color: var(--footer-white);
+        background-color: var(--footer-orange);
+        border: 0;
+        cursor: pointer;
+        font-family: inherit;
+        font-weight: 700;
+    }
+
+    .newsletter-message {
+        min-height: 22px;
+        margin: 8px 0 0;
+        color: #fdba74;
+        font-size: 12px;
+    }
+
+    .footer-bottom {
+        margin-top: 50px;
+        padding-top: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        border-top: 1px solid var(--footer-border);
+        color: #94a3b8;
+        font-size: 13px;
+    }
+
+    .footer-bottom-links {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .footer-bottom-links a {
+        color: #94a3b8;
+        text-decoration: none;
+    }
+
+    .footer-bottom-links a:hover {
+        color: var(--footer-white);
+    }
+
+    @media (max-width: 960px) {
+        .footer-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 620px) {
+        .footer-container {
+            width: min(100% - 28px, 1180px);
+            padding-top: 55px;
+        }
+
+        .footer-grid {
+            grid-template-columns: 1fr;
+            gap: 38px;
+        }
+
+        .footer-brand {
+            max-width: none;
+        }
+
+        .footer-bottom {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .footer-bottom-links {
+            flex-wrap: wrap;
+        }
+    }
+</style>
+
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-grid">
+            <section class="footer-brand">
+                <a href="#home" class="footer-logo">
+                    <img
+                        class="footer-logo-image"
+                        src="Media/logo test2.png"
+                        alt="أسس المرافعة للمحاماة والاستشارات القانونية"
+                        loading="lazy"
+                    >
+                </a>
+
+                <p class="footer-description">
+                    نقدم خدمات قانونية احترافية للأفراد والمنشآت، ونعمل
+                    على حماية حقوق عملائنا من خلال المعرفة القانونية
+                    والخبرة والالتزام بأعلى معايير المهنية والسرية.
+                </p>
+
+                <div class="social-links" aria-label="حسابات التواصل الاجتماعي">
+                    <a href="#" class="social-link" aria-label="منصة إكس">X</a>
+                    <a href="#" class="social-link" aria-label="لينكد إن">in</a>
+                    <a href="#" class="social-link" aria-label="واتساب">واتس</a>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="footer-heading">روابط مهمة</h2>
+
+                <ul class="footer-links">
+                    <li><a href="#home">الصفحة الرئيسية</a></li>
+                    <li><a href="#about">من نحن</a></li>
+                    <li><a href="#services">الخدمات القانونية</a></li>
+                    <li><a href="#why-us">لماذا تختارنا؟</a></li>
+                    <li><a href="#contact">طلب استشارة</a></li>
+                </ul>
+            </section>
+
+            <section>
+                <h2 class="footer-heading">خدماتنا</h2>
+
+                <ul class="footer-links">
+                    <li><a href="#services">الترافع والتقاضي</a></li>
+                    <li><a href="#services">الاستشارات القانونية</a></li>
+                    <li><a href="#services">صياغة العقود</a></li>
+                    <li><a href="#services">قضايا الشركات</a></li>
+                    <li><a href="#services">تسوية المنازعات</a></li>
+                </ul>
+            </section>
+
+            <section>
+                <h2 class="footer-heading">معلومات التواصل</h2>
+
+                <ul class="contact-list">
+                    <li class="contact-item">
+                        <span class="contact-icon" aria-hidden="true">⌖</span>
+                        <span>أبها، المملكة العربية السعودية</span>
+                    </li>
+
+                    <li class="contact-item">
+                        <span class="contact-icon" aria-hidden="true">☎</span>
+                        <a href="tel:+966500000000" dir="ltr">
+                            +966 50 000 0000
+                        </a>
+                    </li>
+
+                    <li class="contact-item">
+                        <span class="contact-icon" aria-hidden="true">✉</span>
+                        <a href="mailto:info@osol-law.sa">
+                            info@osol-law.sa
+                        </a>
+                    </li>
+
+                    <li class="contact-item">
+                        <span class="contact-icon" aria-hidden="true">◷</span>
+                        <span>الأحد - الخميس: 8:00 صباحًا إلى 5:00 مساءً</span>
+                    </li>
+                </ul>
+
+                <div class="footer-newsletter">
+                    <label class="newsletter-label" for="newsletterEmail">
+                        اشترك لاستقبال التحديثات القانونية
+                    </label>
+
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input
+                            type="email"
+                            class="newsletter-input"
+                            id="newsletterEmail"
+                            placeholder="البريد الإلكتروني"
+                            autocomplete="email"
+                            required
+                        >
+
+                        <button type="submit" class="newsletter-button">
+                            اشتراك
+                        </button>
+                    </form>
+
+                    <p class="newsletter-message" id="newsletterMessage"></p>
+                </div>
+            </section>
+        </div>
+
+        <div class="footer-bottom">
+            <p>
+                جميع الحقوق محفوظة ©
+                <span id="currentYear">2026</span>
+                أسس المرافعة.
+            </p>
+
+            <div class="footer-bottom-links">
+                <a href="#">سياسة الخصوصية</a>
+                <a href="#">الشروط والأحكام</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    (() => {
+        const yearElement = document.getElementById("currentYear");
+        const newsletterForm = document.getElementById("newsletterForm");
+        const newsletterEmail = document.getElementById("newsletterEmail");
+        const newsletterMessage = document.getElementById(
+            "newsletterMessage"
+        );
+
+        if (yearElement) {
+            yearElement.textContent = new Date().getFullYear();
+        }
+
+        if (!newsletterForm || !newsletterEmail || !newsletterMessage) {
+            return;
+        }
+
+        newsletterForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            const email = newsletterEmail.value.trim();
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!emailPattern.test(email)) {
+                newsletterMessage.textContent =
+                    "يرجى إدخال بريد إلكتروني صحيح.";
+                return;
+            }
+
+            newsletterMessage.textContent =
+                "تم تسجيل بريدك بنجاح. شكرًا لاشتراكك.";
+
+            newsletterForm.reset();
+        });
+    })();
+</script>

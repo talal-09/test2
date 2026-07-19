@@ -1,0 +1,1139 @@
+<header class="site-header" id="siteHeader" dir="rtl">
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600;700;800&display=swap");
+
+        :root {
+            --header-dark-blue: #172554;
+            --header-blue: #1e3a8a;
+            --header-orange: #f97316;
+            --header-orange-dark: #ea580c;
+            --header-white: #ffffff;
+            --header-text: #1e293b;
+            --header-muted: #64748b;
+            --header-border: #e2e8f0;
+            --header-background: rgba(255, 255, 255, 0.97);
+            --header-overlay: rgba(15, 23, 42, 0.5);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body.mobile-menu-open {
+            overflow: hidden;
+        }
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 9999;
+            width: 100%;
+            font-family: "Tajawal", Arial, sans-serif;
+            background-color: var(--header-background);
+            border-bottom: 1px solid var(--header-border);
+            box-shadow: 0 8px 30px rgba(15, 23, 42, 0.08);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+
+        .header-container {
+            width: min(1180px, calc(100% - 40px));
+            min-height: 82px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+        }
+
+        /* الشعار */
+
+        .header-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+            color: var(--header-dark-blue);
+            text-decoration: none;
+        }
+
+        .header-logo-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--header-white);
+            background: linear-gradient(
+                135deg,
+                var(--header-dark-blue),
+                var(--header-blue)
+            );
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(30, 58, 138, 0.25);
+        }
+
+        .header-logo-icon svg {
+            width: 29px;
+            height: 29px;
+        }
+
+        .header-logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header-logo-title {
+            color: var(--header-dark-blue);
+            font-size: 21px;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .header-logo-subtitle {
+            margin-top: 4px;
+            color: var(--header-muted);
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        /* قائمة الكمبيوتر */
+
+        .desktop-navigation {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            flex: 1;
+        }
+
+        .desktop-navigation a {
+            position: relative;
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 14px;
+            color: var(--header-text);
+            background-color: transparent;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            transition:
+                color 0.25s ease,
+                background-color 0.25s ease;
+        }
+
+        .desktop-navigation a:hover,
+        .desktop-navigation a.active {
+            color: var(--header-blue);
+            background-color: #eef2ff;
+        }
+
+        .desktop-navigation a::after {
+            content: "";
+            position: absolute;
+            right: 50%;
+            bottom: 4px;
+            width: 0;
+            height: 2px;
+            background-color: var(--header-orange);
+            border-radius: 10px;
+            transform: translateX(50%);
+            transition: width 0.25s ease;
+        }
+
+        .desktop-navigation a:hover::after,
+        .desktop-navigation a.active::after {
+            width: 28px;
+        }
+
+        /* أزرار الهيدر */
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        .consultation-button {
+            min-height: 46px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 11px 19px;
+            color: var(--header-white);
+            background: linear-gradient(
+                135deg,
+                var(--header-orange),
+                var(--header-orange-dark)
+            );
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 8px 20px rgba(249, 115, 22, 0.25);
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+        .consultation-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(249, 115, 22, 0.35);
+        }
+
+        .consultation-button svg {
+            width: 19px;
+            height: 19px;
+        }
+
+        /* زر البرجر */
+
+        .mobile-menu-button {
+            position: relative;
+            width: 46px;
+            height: 46px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            color: var(--header-dark-blue);
+            background-color: #f8fafc;
+            border: 1px solid var(--header-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition:
+                color 0.25s ease,
+                background-color 0.25s ease,
+                border-color 0.25s ease;
+        }
+
+        .mobile-menu-button:hover {
+            color: var(--header-blue);
+            background-color: #eef2ff;
+            border-color: #bfdbfe;
+        }
+
+        .burger-lines {
+            position: relative;
+            width: 23px;
+            height: 18px;
+            display: block;
+        }
+
+        .burger-lines span {
+            position: absolute;
+            right: 0;
+            width: 100%;
+            height: 2px;
+            background-color: currentColor;
+            border-radius: 10px;
+            transition:
+                top 0.3s ease,
+                transform 0.3s ease,
+                opacity 0.2s ease;
+        }
+
+        .burger-lines span:nth-child(1) {
+            top: 1px;
+        }
+
+        .burger-lines span:nth-child(2) {
+            top: 8px;
+        }
+
+        .burger-lines span:nth-child(3) {
+            top: 15px;
+        }
+
+        .mobile-menu-button.open .burger-lines span:nth-child(1) {
+            top: 8px;
+            transform: rotate(45deg);
+        }
+
+        .mobile-menu-button.open .burger-lines span:nth-child(2) {
+            opacity: 0;
+            transform: translateX(-8px);
+        }
+
+        .mobile-menu-button.open .burger-lines span:nth-child(3) {
+            top: 8px;
+            transform: rotate(-45deg);
+        }
+
+        /* خلفية القائمة الجانبية */
+
+        .mobile-menu-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9997;
+            display: none;
+            background-color: var(--header-overlay);
+            opacity: 0;
+            visibility: hidden;
+            transition:
+                opacity 0.3s ease,
+                visibility 0.3s ease;
+        }
+
+        .mobile-menu-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* القائمة الجانبية للجوال */
+
+        .mobile-navigation {
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 9998;
+            width: min(330px, 87vw);
+            height: 100vh;
+            display: none;
+            flex-direction: column;
+            overflow-y: auto;
+            background-color: var(--header-white);
+            box-shadow: -15px 0 40px rgba(15, 23, 42, 0.18);
+            transform: translateX(105%);
+            visibility: hidden;
+            transition:
+                transform 0.35s ease,
+                visibility 0.35s ease;
+        }
+
+        .mobile-navigation.open {
+            transform: translateX(0);
+            visibility: visible;
+        }
+
+        .mobile-navigation-header {
+            min-height: 82px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--header-border);
+        }
+
+        .mobile-navigation-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .mobile-navigation-logo {
+            width: 42px;
+            height: 42px;
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+            color: var(--header-white);
+            background: linear-gradient(
+                135deg,
+                var(--header-dark-blue),
+                var(--header-blue)
+            );
+            border-radius: 12px;
+        }
+
+        .mobile-navigation-logo svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .mobile-navigation-title {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mobile-navigation-title strong {
+            color: var(--header-dark-blue);
+            font-size: 16px;
+            font-weight: 800;
+        }
+
+        .mobile-navigation-title span {
+            margin-top: 2px;
+            color: var(--header-muted);
+            font-size: 11px;
+        }
+
+        .mobile-close-button {
+            width: 40px;
+            height: 40px;
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+            color: var(--header-dark-blue);
+            background-color: #f8fafc;
+            border: 1px solid var(--header-border);
+            border-radius: 11px;
+            cursor: pointer;
+        }
+
+        .mobile-close-button svg {
+            width: 21px;
+            height: 21px;
+        }
+
+        .mobile-navigation-links {
+            display: grid;
+            gap: 8px;
+            padding: 22px 18px;
+        }
+
+        .mobile-navigation-links a {
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 15px;
+            color: var(--header-text);
+            background-color: #f8fafc;
+            border: 1px solid transparent;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            text-decoration: none;
+            transition:
+                color 0.25s ease,
+                background-color 0.25s ease,
+                border-color 0.25s ease;
+        }
+
+        .mobile-navigation-links a:hover,
+        .mobile-navigation-links a.active {
+            color: var(--header-blue);
+            background-color: #eef2ff;
+            border-color: #dbeafe;
+        }
+
+        .mobile-link-icon {
+            width: 35px;
+            height: 35px;
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+            color: var(--header-blue);
+            background-color: var(--header-white);
+            border-radius: 9px;
+        }
+
+        .mobile-link-icon svg {
+            width: 19px;
+            height: 19px;
+        }
+
+        .mobile-navigation-links .mobile-consultation {
+            justify-content: center;
+            gap: 9px;
+            margin-top: 10px;
+            color: var(--header-white);
+            background: linear-gradient(
+                135deg,
+                var(--header-orange),
+                var(--header-orange-dark)
+            );
+            border: none;
+            box-shadow: 0 10px 22px rgba(249, 115, 22, 0.24);
+        }
+
+        .mobile-navigation-links .mobile-consultation:hover {
+            color: var(--header-white);
+            background: linear-gradient(
+                135deg,
+                var(--header-orange-dark),
+                #c2410c
+            );
+            border: none;
+        }
+
+        .mobile-navigation-footer {
+            margin-top: auto;
+            padding: 20px;
+            color: var(--header-muted);
+            background-color: #f8fafc;
+            border-top: 1px solid var(--header-border);
+            font-size: 12px;
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        /* الشاشات المتوسطة والجوال */
+
+        @media (max-width: 1000px) {
+            .desktop-navigation {
+                display: none;
+            }
+
+            .mobile-menu-button {
+                display: inline-flex;
+            }
+
+            .mobile-navigation {
+                display: flex;
+            }
+
+            .mobile-menu-overlay {
+                display: block;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .header-container {
+                width: calc(100% - 24px);
+                min-height: 72px;
+                gap: 12px;
+            }
+
+            .header-logo-icon {
+                width: 43px;
+                height: 43px;
+                border-radius: 12px;
+            }
+
+            .header-logo-icon svg {
+                width: 25px;
+                height: 25px;
+            }
+
+            .header-logo-title {
+                font-size: 17px;
+            }
+
+            .header-logo-subtitle {
+                display: none;
+            }
+
+            .consultation-button {
+                display: none;
+            }
+
+            .mobile-menu-button {
+                width: 43px;
+                height: 43px;
+            }
+
+            .mobile-navigation-header {
+                min-height: 72px;
+            }
+        }
+
+        @media (min-width: 1001px) {
+            .mobile-navigation,
+            .mobile-menu-overlay {
+                display: none !important;
+            }
+        }
+    </style>
+
+    <div class="header-container">
+        <a href="index.html" class="header-logo header-home-link">
+            <span class="header-logo-icon" aria-hidden="true">
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        d="M12 3V21"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        stroke-linecap="round"
+                    />
+
+                    <path
+                        d="M5 6H19"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        stroke-linecap="round"
+                    />
+
+                    <path
+                        d="M7 6L3.5 12H10.5L7 6Z"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linejoin="round"
+                    />
+
+                    <path
+                        d="M17 6L13.5 12H20.5L17 6Z"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linejoin="round"
+                    />
+
+                    <path
+                        d="M8 21H16"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        stroke-linecap="round"
+                    />
+                </svg>
+            </span>
+
+            <span class="header-logo-text">
+                <span class="header-logo-title">أسس المرافعة</span>
+
+                <span class="header-logo-subtitle">
+                    للمحاماة والاستشارات القانونية
+                </span>
+            </span>
+        </a>
+
+        <nav class="desktop-navigation" aria-label="القائمة الرئيسية">
+            <a href="index.html" class="nav-home-link">
+                الرئيسية
+            </a>
+
+            <a href="index.html#about" class="nav-about-link">
+                من نحن
+            </a>
+
+            <a href="index.html#services" class="nav-services-link">
+                خدماتنا
+            </a>
+
+            <a href="index.html#why-us" class="nav-why-link">
+                لماذا نحن
+            </a>
+
+            <a href=".agents/contact.html" class="nav-contact-link">
+                اتصل بنا
+            </a>
+        </nav>
+
+        <div class="header-actions">
+            <a
+                href=".agents/contact.html#contact-form"
+                class="consultation-button consultation-link"
+            >
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                >
+                    <path
+                        d="M8 10H16"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        stroke-linecap="round"
+                    />
+
+                    <path
+                        d="M8 14H13"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        stroke-linecap="round"
+                    />
+
+                    <path
+                        d="M6 19L3.5 21V6.5C3.5 4.57 5.07 3 7 3H17C18.93 3 20.5 4.57 20.5 6.5V15.5C20.5 17.43 18.93 19 17 19H6Z"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        stroke-linejoin="round"
+                    />
+                </svg>
+
+                اطلب استشارة
+            </a>
+
+            <button
+                type="button"
+                class="mobile-menu-button"
+                id="mobileMenuButton"
+                aria-label="فتح القائمة"
+                aria-expanded="false"
+                aria-controls="mobileNavigation"
+            >
+                <span class="burger-lines" aria-hidden="true">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+            </button>
+        </div>
+    </div>
+
+    <div
+        class="mobile-menu-overlay"
+        id="mobileMenuOverlay"
+        aria-hidden="true"
+    ></div>
+
+    <nav
+        class="mobile-navigation"
+        id="mobileNavigation"
+        aria-label="قائمة الجوال"
+        aria-hidden="true"
+    >
+        <div class="mobile-navigation-header">
+            <div class="mobile-navigation-brand">
+                <span class="mobile-navigation-logo" aria-hidden="true">
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M12 3V21"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                        />
+
+                        <path
+                            d="M5 6H19"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                        />
+
+                        <path
+                            d="M7 6L3.5 12H10.5L7 6Z"
+                            stroke="currentColor"
+                            stroke-width="1.6"
+                            stroke-linejoin="round"
+                        />
+
+                        <path
+                            d="M17 6L13.5 12H20.5L17 6Z"
+                            stroke="currentColor"
+                            stroke-width="1.6"
+                            stroke-linejoin="round"
+                        />
+
+                        <path
+                            d="M8 21H16"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                        />
+                    </svg>
+                </span>
+
+                <span class="mobile-navigation-title">
+                    <strong>أسس المرافعة</strong>
+                    <span>للمحاماة والاستشارات القانونية</span>
+                </span>
+            </div>
+
+            <button
+                type="button"
+                class="mobile-close-button"
+                id="mobileCloseButton"
+                aria-label="إغلاق القائمة"
+            >
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                >
+                    <path
+                        d="M6 6L18 18"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                    />
+
+                    <path
+                        d="M18 6L6 18"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                    />
+                </svg>
+            </button>
+        </div>
+
+        <div class="mobile-navigation-links">
+            <a href="index.html" class="nav-home-link">
+                <span class="mobile-link-icon" aria-hidden="true">
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M3 11L12 3L21 11"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+
+                        <path
+                            d="M5 10V21H19V10"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linejoin="round"
+                        />
+
+                        <path
+                            d="M9 21V15H15V21"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linejoin="round"
+                        />
+                    </svg>
+                </span>
+
+                الرئيسية
+            </a>
+
+            <a href="index.html#about" class="nav-about-link">
+                <span class="mobile-link-icon" aria-hidden="true">
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <circle
+                            cx="12"
+                            cy="8"
+                            r="4"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                        />
+
+                        <path
+                            d="M4.5 21C5.2 16.5 8 14.5 12 14.5C16 14.5 18.8 16.5 19.5 21"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                        />
+                    </svg>
+                </span>
+
+                من نحن
+            </a>
+
+            <a href="index.html#services" class="nav-services-link">
+                <span class="mobile-link-icon" aria-hidden="true">
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <rect
+                            x="4"
+                            y="4"
+                            width="6"
+                            height="6"
+                            rx="1.5"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                        />
+
+                        <rect
+                            x="14"
+                            y="4"
+                            width="6"
+                            height="6"
+                            rx="1.5"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                        />
+
+                        <rect
+                            x="4"
+                            y="14"
+                            width="6"
+                            height="6"
+                            rx="1.5"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                        />
+
+                        <rect
+                            x="14"
+                            y="14"
+                            width="6"
+                            height="6"
+                            rx="1.5"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                        />
+                    </svg>
+                </span>
+
+                خدماتنا
+            </a>
+
+            <a href="index.html#why-us" class="nav-why-link">
+                <span class="mobile-link-icon" aria-hidden="true">
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M12 3L14.7 8.5L21 9.4L16.5 13.8L17.6 20L12 17L6.4 20L7.5 13.8L3 9.4L9.3 8.5L12 3Z"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linejoin="round"
+                        />
+                    </svg>
+                </span>
+
+                لماذا نحن
+            </a>
+
+            <a href=".agents/contact.html" class="nav-contact-link">
+                <span class="mobile-link-icon" aria-hidden="true">
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M6.6 3.5L9.2 7.1C9.6 7.7 9.5 8.5 8.9 9L7.5 10.2C8.6 12.6 10.5 14.5 12.9 15.6L14.1 14.2C14.6 13.6 15.4 13.5 16 13.9L19.6 16.5C20.3 17 20.5 17.9 20.1 18.6L19.2 20.1C18.8 20.8 18 21.2 17.2 21.1C9.9 20.2 3.9 14.2 3 6.9C2.9 6.1 3.3 5.3 4 4.9L5.5 4C5.9 3.8 6.3 3.6 6.6 3.5Z"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linejoin="round"
+                        />
+                    </svg>
+                </span>
+
+                اتصل بنا
+            </a>
+
+            <a
+                href=".agents/contact.html#contact-form"
+                class="mobile-consultation consultation-link"
+            >
+                اطلب استشارة
+            </a>
+        </div>
+
+        <div class="mobile-navigation-footer">
+            جميع الاستفسارات والمعلومات المقدمة للمكتب تعامل بسرية ومهنية.
+        </div>
+    </nav>
+
+    <script>
+        (function initializeLawOfficeHeader() {
+            const header = document.getElementById("siteHeader");
+
+            if (!header) {
+                return;
+            }
+
+            const currentPath = window.location.pathname.toLowerCase();
+
+            const isInsideAgentsFolder =
+                currentPath.includes("/.agents/");
+
+            const homePagePath = isInsideAgentsFolder
+                ? "../index.html"
+                : "index.html";
+
+            const contactPagePath = isInsideAgentsFolder
+                ? "contact.html"
+                : ".agents/contact.html";
+
+            const homeLinks = header.querySelectorAll(
+                ".header-home-link, .nav-home-link"
+            );
+
+            const aboutLinks = header.querySelectorAll(
+                ".nav-about-link"
+            );
+
+            const servicesLinks = header.querySelectorAll(
+                ".nav-services-link"
+            );
+
+            const whyLinks = header.querySelectorAll(
+                ".nav-why-link"
+            );
+
+            const contactLinks = header.querySelectorAll(
+                ".nav-contact-link"
+            );
+
+            const consultationLinks = header.querySelectorAll(
+                ".consultation-link"
+            );
+
+            homeLinks.forEach(function (link) {
+                link.href = homePagePath;
+            });
+
+            aboutLinks.forEach(function (link) {
+                link.href = homePagePath + "#about";
+            });
+
+            servicesLinks.forEach(function (link) {
+                link.href = homePagePath + "#services";
+            });
+
+            whyLinks.forEach(function (link) {
+                link.href = homePagePath + "#why-us";
+            });
+
+            contactLinks.forEach(function (link) {
+                link.href = contactPagePath;
+            });
+
+            consultationLinks.forEach(function (link) {
+                link.href = contactPagePath + "#contact-form";
+            });
+
+            const isContactPage =
+                currentPath.endsWith("/contact.html");
+
+            const activeLinks = isContactPage
+                ? contactLinks
+                : header.querySelectorAll(".nav-home-link");
+
+            activeLinks.forEach(function (link) {
+                link.classList.add("active");
+            });
+
+            const menuButton =
+                header.querySelector("#mobileMenuButton");
+
+            const closeButton =
+                header.querySelector("#mobileCloseButton");
+
+            const mobileNavigation =
+                header.querySelector("#mobileNavigation");
+
+            const menuOverlay =
+                header.querySelector("#mobileMenuOverlay");
+
+            if (
+                !menuButton ||
+                !closeButton ||
+                !mobileNavigation ||
+                !menuOverlay
+            ) {
+                return;
+            }
+
+            function openMobileMenu() {
+                mobileNavigation.classList.add("open");
+                menuOverlay.classList.add("open");
+                menuButton.classList.add("open");
+
+                menuButton.setAttribute(
+                    "aria-expanded",
+                    "true"
+                );
+
+                menuButton.setAttribute(
+                    "aria-label",
+                    "إغلاق القائمة"
+                );
+
+                mobileNavigation.setAttribute(
+                    "aria-hidden",
+                    "false"
+                );
+
+                menuOverlay.setAttribute(
+                    "aria-hidden",
+                    "false"
+                );
+
+                document.body.classList.add(
+                    "mobile-menu-open"
+                );
+            }
+
+            function closeMobileMenu() {
+                mobileNavigation.classList.remove("open");
+                menuOverlay.classList.remove("open");
+                menuButton.classList.remove("open");
+
+                menuButton.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+                menuButton.setAttribute(
+                    "aria-label",
+                    "فتح القائمة"
+                );
+
+                mobileNavigation.setAttribute(
+                    "aria-hidden",
+                    "true"
+                );
+
+                menuOverlay.setAttribute(
+                    "aria-hidden",
+                    "true"
+                );
+
+                document.body.classList.remove(
+                    "mobile-menu-open"
+                );
+            }
+
+            menuButton.addEventListener(
+                "click",
+                function () {
+                    const isOpen =
+                        mobileNavigation.classList.contains("open");
+
+                    if (isOpen) {
+                        closeMobileMenu();
+                    } else {
+                        openMobileMenu();
+                    }
+                }
+            );
+
+            closeButton.addEventListener(
+                "click",
+                closeMobileMenu
+            );
+
+            menuOverlay.addEventListener(
+                "click",
+                closeMobileMenu
+            );
+
+            mobileNavigation
+                .querySelectorAll("a")
+                .forEach(function (link) {
+                    link.addEventListener(
+                        "click",
+                        closeMobileMenu
+                    );
+                });
+
+            document.addEventListener(
+                "keydown",
+                function (event) {
+                    if (
+                        event.key === "Escape" &&
+                        mobileNavigation.classList.contains("open")
+                    ) {
+                        closeMobileMenu();
+                        menuButton.focus();
+                    }
+                }
+            );
+
+            window.addEventListener(
+                "resize",
+                function () {
+                    if (window.innerWidth > 1000) {
+                        closeMobileMenu();
+                    }
+                }
+            );
+        })();
+    </script>
+</header>
